@@ -1,0 +1,26 @@
+# ----------------------------------------------------------------------
+# VIRTUAL ENVIRONMENTS AND BUILD ARTIFACTS (MUST BE IGNORED)
+# ----------------------------------------------------------------------
+.venv/
+my_capstone1/
+__pycache__/
+*.pyc
+*.o
+*.so
+uv.lock
+
+# ----------------------------------------------------------------------
+# LARGE FILES HOSTED EXTERNALLY (REMOVED TO PREVENT PUSH ERROR)
+# These files must be downloaded manually by the reviewer.
+# ----------------------------------------------------------------------
+model_pipeline_fitted.bin
+model_final.bin
+Teacher-Churn_Mid_Term_Project1.csv
+*.bin
+*.pkl
+*.csv
+
+# ----------------------------------------------------------------------
+# Jupyter Notebook Checkpoints
+# ----------------------------------------------------------------------
+.ipynb_checkpoints
