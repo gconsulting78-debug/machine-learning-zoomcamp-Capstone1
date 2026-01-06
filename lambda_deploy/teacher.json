@@ -1,0 +1,17 @@
+{
+  "teacher":
+    {
+        "teacher_ethnicity": "Chinese",
+        "teacher_age": 24,
+        "teacher_tenure": 9.0,
+        "student_ratio": 27.0,
+        "education": "NG",
+        "teacher_rating": 5,
+        "teacher_rating_last_year": 3,
+        "sick_days": 10,
+        "marital_status": "Single",
+        "gender": "Female",
+        "student_grade": "Primary",
+        "subject": "English"
+    }    
+}

@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: predict-teacher-churn
+  labels:
+    app: predict-teacher-churn
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: predict-teacher-churn
+  template:
+    metadata:
+      labels:
+        app: predict-teacher-churn
+    spec:
+      containers:
+      - name: predict-teacher-churn
+        image: predict-teacher-churn
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5

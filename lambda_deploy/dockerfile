@@ -1,0 +1,45 @@
+# --------------------------------------------------------------------------------
+# Stage 1: Builder - Install Dependencies
+# --------------------------------------------------------------------------------
+FROM public.ecr.aws/lambda/python:3.12 AS builder
+
+# 1. Set the working directory for dependency handling
+WORKDIR /app
+
+# 2. Install the 'uv' package manager globally
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/bin/
+
+# 3. Copy dependency files
+# We only copy the files needed for installation
+COPY pyproject.toml uv.lock ./
+
+# 4. Install dependencies using the correct command:
+# 'uv pip sync' reads the requirements-style uv.lock file and installs them.
+# We install directly into the system path of the Lambda base image.
+RUN uv pip sync uv.lock --system
+
+# --------------------------------------------------------------------------------
+# Stage 2: Final Image - Application Code
+# --------------------------------------------------------------------------------
+# Use the same base image for the final deployment
+FROM public.ecr.aws/lambda/python:3.12
+
+# 1. Lambda's runtime expects code in /var/task
+WORKDIR /var/task
+
+# 2. Copy installed dependencies from the 'builder' stage
+# This significantly reduces the final image size by excluding build tools and cache.
+COPY --from=builder /var/lang/lib/python3.12/site-packages /var/lang/lib/python3.12/site-packages
+
+# 3. Copy the application code, the model, and the Mangum handler file
+COPY app.py model_pipeline_fitted.bin lambda_function.py ./
+
+# 4. Define the handler function for the Lambda runtime.
+# This MUST be set to call your Mangum wrapper function.
+# Format: <handler_file>.<handler_function>
+CMD ["lambda_function.lambda_handler"]
+
+# 5. REMOVE all Uvicorn/Kubernetes-related commands:
+# REMOVED: ENV PATH="/code/.venv/bin:$PATH"
+# REMOVED: EXPOSE 9696
+# REMOVED: ENTRYPOINT ["/app/.venv/bin/uvicorn", ...]
