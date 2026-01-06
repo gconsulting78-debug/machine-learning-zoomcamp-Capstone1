@@ -1,15 +1,23 @@
-# 🍎 Teacher Churn Prediction: Serverless Deployment
+## 🎯 Introduction: Project Motivation
 
-## 🌟 1. Project Overview & Goal
+This project applies machine learning principles to predict **teacher churn** for a pre-high school chain operator. High teacher turnover was impacting student scores and parent satisfaction, making this a critical business problem. The solution is a trained **XGBoost classification model** (best AUC: 0.8973) deployed as a **containerized AWS Lambda function** for serverless prediction inference.
 
-This project applies machine learning principles to predict **teacher churn** for a pre-high school chain operator. High teacher turnover was 
-impacting student scores and parent satisfaction, making this a critical business problem.
+---
 
-The solution is a trained **XGBoost classification model** (best AUC: 0.8973) deployed as a **containerized AWS Lambda function** for serverless 
-prediction inference.
+## ➡️ 1. Repository Setup & Cloning
 
-**Architecture:** Docker Container (ECR) -> AWS Lambda.
+To begin evaluating the project, use the following commands to clone the repository and navigate into the project directory.
 
+1.  **Clone the Repository:**
+    ```bash
+    git clone [https://github.com/gconsulting78-debug/machine-learning-zoomcamp-Capstone1.git](https://github.com/gconsulting78-debug/machine-learning-zoomcamp-Capstone1.git)
+    ```
+    *(Note: Please ensure this link points to your final, correct GitHub repository URL.)*
+
+2.  **Navigate to the Directory:**
+    ```bash
+    cd Capstone1
+    ```
 ---
 
 ## 💾 2. Critical Prerequisites and Asset Downloads
