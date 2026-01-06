@@ -96,7 +96,13 @@ Once the function state is `Active`, you can verify the successful execution by 
       response.json
     ```
 
-**Expected Result:** The `response.json` file should contain a prediction similar to: `{"churn_probability": 0.0815..., "churn": "False"}`.
+**Expected Result:** The `response.json` file should contain the following output:
+
+```json
+{
+  "churn_probability": 0.08159767836332321,
+  "churn": "False"
+}.
 
 ---
 
